@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jess – Property Agent Gading Serpong & BSD</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF6F1;
+    --warm-white: #FFF9F4;
+    --terracotta: #C4856A;
+    --terracotta-deep: #A8684F;
+    --terracotta-light: #F0D5C8;
+    --sage: #3D5A47;
+    --gold: #B8924A;
+    --charcoal: #2C2420;
+    --mid: #7A6258;
+    --light-text: #A89288;
+    --whatsapp: #25D366;
+    --whatsapp-deep: #1DA851;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Outfit', sans-serif;
+    color: var(--charcoal);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* ── PAGE WRAPPER ── */
+  .page {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 0 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HERO SECTION ── */
+  .hero {
+    position: relative;
+    padding: 56px 32px 40px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,133,106,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(61,90,71,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Photo */
+  .photo-ring {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--terracotta), var(--gold), var(--sage));
+    padding: 3px;
+    margin: 0 auto 20px;
+    animation: fadeDown 0.7s ease both;
+  }
+
+  .photo-inner {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: var(--terracotta-light);
+    border: 3px solid var(--cream);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+  }
+
+  .photo-inner img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  /* Name */
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--charcoal);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    animation: fadeDown 0.7s 0.1s ease both;
+  }
+
+  .hero-name span {
+    color: var(--terracotta);
+    font-style: italic;
+  }
+
+  .hero-title {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--light-text);
+    margin-top: 8px;
+    animation: fadeDown 0.7s 0.2s ease both;
+  }
+
+  .hero-divider {
+    width: 40px; height: 2px;
+    background: var(--terracotta);
+    margin: 16px auto;
+    border-radius: 2px;
+    animation: fadeDown 0.7s 0.25s ease both;
+  }
+
+  .hero-tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--mid);
+    line-height: 1.55;
+    max-width: 300px;
+    margin: 0 auto;
+    animation: fadeDown 0.7s 0.3s ease both;
+  }
+
+  /* ── TRUST BADGES ── */
+  .badges {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 24px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+    animation: fadeDown 0.7s 0.4s ease both;
+  }
+
+  .badge {
+    background: white;
+    border: 1px solid var(--terracotta-light);
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--mid);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 8px rgba(196,133,106,0.1);
+  }
+
+  /* ── PRIMARY CTA ── */
+  .cta-section {
+    padding: 32px 24px 8px;
+    animation: fadeDown 0.7s 0.5s ease both;
+  }
+
+  .btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 18px 24px;
+    background: var(--whatsapp);
+    color: white;
+    border-radius: 16px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    box-shadow: 0 8px 32px rgba(37,211,102,0.35);
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-whatsapp::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+  }
+
+  .btn-whatsapp:hover {
+    background: var(--whatsapp-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(37,211,102,0.45);
+  }
+
+  .btn-whatsapp:active { transform: translateY(0); }
+
+  .wa-icon {
+    width: 24px; height: 24px;
+    fill: white;
+    flex-shrink: 0;
+  }
+
+  .btn-sub {
+    text-align: center;
+    font-size: 12px;
+    color: var(--light-text);
+    margin-top: 10px;
+  }
+
+  /* ── LINKS SECTION ── */
+  .links-section {
+    padding: 8px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    animation: fadeDown 0.7s 0.6s ease both;
+  }
+
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: white;
+    border: 1px solid rgba(196,133,106,0.15);
+    border-radius: 14px;
+    padding: 16px 18px;
+    text-decoration: none;
+    color: var(--charcoal);
+    transition: all 0.22s ease;
+    box-shadow: 0 2px 12px rgba(44,36,32,0.05);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .link-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    border-radius: 4px 0 0 4px;
+    background: var(--terracotta);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .link-card:hover {
+    transform: translateX(4px);
+    border-color: rgba(196,133,106,0.35);
+    box-shadow: 0 4px 20px rgba(44,36,32,0.1);
+  }
+
+  .link-card:hover::before { opacity: 1; }
+
+  .link-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .icon-terra { background: var(--terracotta-light); }
+  .icon-sage { background: rgba(61,90,71,0.12); }
+  .icon-gold { background: rgba(184,146,74,0.12); }
+  .icon-blue { background: rgba(58,78,107,0.1); }
+
+  .link-text { flex: 1; }
+
+  .link-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--charcoal);
+    line-height: 1.2;
+  }
+
+  .link-desc {
+    font-size: 12px;
+    color: var(--light-text);
+    margin-top: 2px;
+    font-weight: 300;
+  }
+
+  .link-arrow {
+    font-size: 16px;
+    color: var(--terracotta-light);
+    transition: transform 0.2s, color 0.2s;
+  }
+
+  .link-card:hover .link-arrow {
+    transform: translateX(3px);
+    color: var(--terracotta);
+  }
+
+  /* ── LEAD MAGNET CARD ── */
+  .lead-magnet {
+    margin: 4px 24px;
+    background: linear-gradient(135deg, var(--charcoal) 0%, #3D2C28 100%);
+    border-radius: 18px;
+    padding: 24px 22px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeDown 0.7s 0.65s ease both;
+  }
+
+  .lead-magnet::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(196,133,106,0.2);
+  }
+
+  .lead-magnet::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: -30px;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: rgba(61,90,71,0.2);
+  }
+
+  .lm-tag {
+    display: inline-block;
+    background: var(--terracotta);
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .lm-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: white;
+    line-height: 1.3;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 6px;
+  }
+
+  .lm-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 18px;
+  }
+
+  .lm-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--terracotta);
+    color: white;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    transition: all 0.2s;
+  }
+
+  .lm-btn:hover {
+    background: var(--terracotta-deep);
+    transform: translateY(-1px);
+  }
+
+  /* ── ABOUT STRIP ── */
+  .about-strip {
+    margin: 12px 24px;
+    background: white;
+    border-radius: 18px;
+    padding: 24px 22px;
+    border: 1px solid rgba(196,133,106,0.12);
+    box-shadow: 0 2px 12px rgba(44,36,32,0.05);
+    animation: fadeDown 0.7s 0.7s ease both;
+  }
+
+  .strip-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 10px;
+  }
+
+  .strip-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--mid);
+    line-height: 1.65;
+  }
+
+  .strip-text strong {
+    font-style: normal;
+    color: var(--charcoal);
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  /* ── SOCIAL ROW ── */
+  .social-row {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    padding: 24px 24px 8px;
+    animation: fadeDown 0.7s 0.75s ease both;
+  }
+
+  .social-btn {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: white;
+    border: 1px solid rgba(196,133,106,0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(44,36,32,0.06);
+  }
+
+  .social-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(44,36,32,0.12);
+    border-color: var(--terracotta);
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 32px 24px 0;
+    animation: fadeDown 0.7s 0.8s ease both;
+  }
+
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--terracotta);
+    margin-bottom: 4px;
+  }
+
+  .footer-note {
+    font-size: 11px;
+    color: var(--light-text);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .section-gap {
+    height: 8px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE FINE-TUNE ── */
+  @media (max-width: 360px) {
+    .hero-name { font-size: 30px; }
+    .badges { gap: 7px; }
+    .badge { font-size: 11px; padding: 5px 11px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="photo-ring">
+      <div class="photo-inner">
+        <!-- Replace src with your actual photo URL -->
+        🏠
+      </div>
+    </div>
+
+    <div class="hero-name">Halo, aku <span>Jess!</span></div>
+    <div class="hero-title">Property Agent · Gading Serpong & BSD</div>
+    <div class="hero-divider"></div>
+    <div class="hero-tagline">"Temen jujur buat kamu yang mau beli rumah pertama"</div>
+  </section>
+
+  <!-- ── TRUST BADGES ── -->
+  <div class="badges">
+    <div class="badge">🏠 First Home Specialist</div>
+    <div class="badge">📍 Gading Serpong & BSD</div>
+    <div class="badge">✅ Konsultasi Gratis</div>
+  </div>
+
+  <!-- ── PRIMARY CTA ── -->
+  <div class="cta-section">
+    <a href="https://wa.me/62XXXXXXXXXX?text=Halo%20Jess!%20Aku%20mau%20konsultasi%20soal%20beli%20rumah%20pertama%20%F0%9F%8F%A0" class="btn-whatsapp" target="_blank">
+      <svg class="wa-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      💬 Chat Jess – Konsultasi Gratis
+    </a>
+    <div class="btn-sub">Balas dalam 1 jam · Nggak ada pressure</div>
+  </div>
+
+  <div class="section-gap"></div>
+
+  <!-- ── LINKS ── -->
+  <div class="links-section">
+
+    <a href="https://instagram.com/cijesss" class="link-card" target="_blank">
+      <div class="link-icon icon-terra">📸</div>
+      <div class="link-text">
+        <div class="link-title">Instagram @cijesss</div>
+        <div class="link-desc">Tips harian, listing, & cerita jujur soal properti</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="#checklist" class="link-card">
+      <div class="link-icon icon-sage">📋</div>
+      <div class="link-text">
+        <div class="link-title">Checklist Beli Rumah Pertama</div>
+        <div class="link-desc">20 hal yang harus dicek sebelum tanda tangan</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://wa.me/62XXXXXXXXXX?text=Halo%20Jess!%20Aku%20mau%20lihat%20listing%20terbaru%20dong%20%F0%9F%8F%A0" class="link-card" target="_blank">
+      <div class="link-icon icon-gold">🏘️</div>
+      <div class="link-text">
+        <div class="link-title">Listing Properti Terbaru</div>
+        <div class="link-desc">BSD · Gading Serpong · Tangerang</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://tiktok.com/@cijesss" class="link-card" target="_blank">
+      <div class="link-icon icon-blue">🎬</div>
+      <div class="link-text">
+        <div class="link-title">TikTok – Tips Properti</div>
+        <div class="link-desc">Video singkat, info yang nggak ada di brosur</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+  </div>
+
+  <div class="section-gap"></div>
+
+  <!-- ── LEAD MAGNET ── -->
+  <div class="lead-magnet" id="checklist">
+    <div class="lm-tag">✨ Gratis</div>
+    <div class="lm-title">Checklist Beli<br>Rumah Pertama</div>
+    <div class="lm-desc">20 hal yang harus kamu cek & tanyain sebelum tanda tangan — yang nggak pernah dibilang agen lain.</div>
+    <a href="https://wa.me/62XXXXXXXXXX?text=Halo%20Jess!%20Aku%20mau%20minta%20checklist%20beli%20rumah%20pertama%20dong%20%F0%9F%8F%A0" class="lm-btn" target="_blank">
+      📩 Minta Checklist Gratis
+    </a>
+  </div>
+
+  <div class="section-gap"></div>
+
+  <!-- ── ABOUT STRIP ── -->
+  <div class="about-strip">
+    <div class="strip-label">Kenapa Jess?</div>
+    <div class="strip-text">
+      Aku pernah jadi first home buyer yang bingung — nggak ada yang kasih tau apa yang harus dicek, ditanya, atau dibanding-bandingin.<br><br>
+      <strong>Sekarang aku property agent bukan cuma buat jual. Tapi buat mastiin kamu nggak ngalamin hal yang sama kayak aku.</strong>
+    </div>
+  </div>
+
+  <!-- ── SOCIAL ROW ── -->
+  <div class="social-row">
+    <a href="https://instagram.com/cijesss" class="social-btn" target="_blank" title="Instagram">📸</a>
+    <a href="https://tiktok.com/@cijesss" class="social-btn" target="_blank" title="TikTok">🎵</a>
+    <a href="https://youtube.com/@cijesss" class="social-btn" target="_blank" title="YouTube">▶️</a>
+    <a href="https://wa.me/62XXXXXXXXXX" class="social-btn" target="_blank" title="WhatsApp">💬</a>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="footer">
+    <div class="footer-name">cijesss</div>
+    <div class="footer-note">Property Agent · Gading Serpong · BSD · Tangerang</div>
+  </div>
+
+</div>
+</body>
+</html>
